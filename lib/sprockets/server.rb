@@ -187,15 +187,7 @@ module Sprockets
           headers["Last-Modified"]  = asset.mtime.httpdate
           headers["ETag"]           = etag(asset)
 
-          # If the request url contains a fingerprint, set a long
-          # expires on the response
-          if path_fingerprint(env["PATH_INFO"])
-            headers["Cache-Control"] << ", max-age=31536000"
-
-          # Otherwise set `must-revalidate` since the could be modified.
-          else
-            headers["Cache-Control"] << ", must-revalidate"
-          end
+          headers["Cache-Control"] << ", max-age=31536000"
         end
       end
 
